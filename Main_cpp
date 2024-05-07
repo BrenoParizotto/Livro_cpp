@@ -1,0 +1,113 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Livro {
+string titulo_livro, nome_autor;
+int paginas_livro,volume_livro, edicao_livro, pagina_atual;
+
+public:
+    Livro ();
+    Livro (string nome, int num_paginas);
+    void definirAutor (string autor);
+    void definirNomeLivro(string nome);
+    void definirPaginas(int pag);
+    void proximaPagina();
+    void irParaPagina(int pagina);
+    void exibirInformacoes();
+
+
+};
+
+Livro::Livro () { // construtor padrao
+    nome_autor = "";
+    titulo_livro = "";
+    pagina_atual = 0;
+    paginas_livro = 0;
+    edicao_livro = 0;
+    volume_livro = 0;
+    cout << "Objeto criado." << endl;
+    };
+
+Livro::Livro (string nome,int num_paginas) { // construtor com nome e numero de paginas
+
+    if(nome.length() > 30) {
+        cout << "Digite um nome de até 30 caracteres." << endl;
+            };
+    titulo_livro = nome;
+    pagina_atual = 0;
+    paginas_livro = num_paginas;
+    edicao_livro = 0;
+    volume_livro = 0;
+    cout << "Objeto criado." << endl;
+    };
+
+void Livro::definirAutor(string autor) {
+
+if (nome_autor == "") {
+    if (autor.length() < 21) {
+        nome_autor = autor;
+    } else {
+        cout << "É válido apenas 20 caracteres para o autor." << endl;
+    };
+} else {
+    cout << "Nome do autor já definido" << endl;}
+};
+
+void Livro::definirPaginas (int pag) {
+if (paginas_livro == 0) {
+    paginas_livro = pag;
+} else {
+cout << "Páginas do livro já definida." << endl;}
+};
+
+void Livro::proximaPagina() {
+if (pagina_atual < paginas_livro){
+    pagina_atual++;
+} else {
+cout << "Já estamos na ultima pagina do livro." << endl;}
+};
+
+void Livro::irParaPagina(int pagina) {
+if (pagina < paginas_livro) {
+    pagina_atual = pagina;
+    cout << "Agora estamos na pagina:  " << pagina << endl;
+} else {
+cout << "Impossivel chegar nessa pagina, livro pequeno." << endl;}
+};
+
+void Livro::exibirInformacoes() {
+if (nome_autor != "" || titulo_livro != "" || pagina_atual != 0 || paginas_livro != 0 || edicao_livro != 0 || volume_livro != 0) {
+    cout << endl;
+    cout << "----- Exibindo informacoes do livro: "<< titulo_livro << " -----"<< endl;
+    cout << "Titulo: " << titulo_livro << endl;
+    cout << "Autor: " << nome_autor << endl;
+    cout << "Paginas: " << paginas_livro << endl;
+    cout << "Pagina Atual: "<< pagina_atual << endl;
+    cout << endl;}
+ else {
+    cout << "Nao existem informacoes a serem exibidas" << endl;
+ }};
+
+
+int main()
+{
+    Livro *livro1 = new Livro("brenao", 43); // dinamicamente
+    livro1->exibirInformacoes();
+    livro1->definirPaginas(50);
+    livro1->exibirInformacoes();
+    livro1->irParaPagina(50);
+    livro1->exibirInformacoes();
+
+    Livro livro2; // estatico
+
+
+    delete livro1;
+
+
+
+
+
+    return 0;
+}
